@@ -1,0 +1,36 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.DashboardFragment"
+        android:label="Dashboard" />
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.AboutFragment"
+        android:label="About" />
+
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.ProjectsFragment"
+        android:label="Projects" />
+
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.MessagesFragment"
+        android:label="Messages" />
+
+    <fragment
+        android:id="@+id/blogsFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.BlogsFragment"
+        android:label="Blogs" />
+
+    <fragment
+        android:id="@+id/experienceFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.ExperienceFragment"
+        android:label="Experience" />
+
+</navigation>

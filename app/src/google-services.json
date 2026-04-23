@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "427005978747",
+    "project_id": "portfolio-24820",
+    "storage_bucket": "portfolio-24820.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427005978747:android:37d80ebe29dfe98351dade",
+        "android_client_info": {
+          "package_name": "com.aditya.porfiliohandler"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHm5xO9heXHSgExLHvFySOqTc7ifAQTPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
