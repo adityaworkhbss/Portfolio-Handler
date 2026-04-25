@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aditya.porfiliohandler.domain.model.*
 import com.aditya.porfiliohandler.domain.usecase.*
+import com.aditya.porfiliohandler.presenter.ResponseHandler.UIEvent
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -16,6 +17,9 @@ class MainViewModel(
     private val _dashboard = MutableLiveData<Dashboard>()
     val dashboard: LiveData<Dashboard> = _dashboard
 
+    private val _uiEvent = MutableLiveData<UIEvent>()
+    val uiEvent : LiveData<UIEvent> = _uiEvent
+
     fun getDashboardData() {
         viewModelScope.launch {
             _dashboard.value = dashboardUseCase()
@@ -24,12 +28,29 @@ class MainViewModel(
 
     fun deleteMessage(message: Messages) {
         viewModelScope.launch {
+
+            _uiEvent.value = UIEvent.loading
+
             val res = messageUseCase.delete(message)
             if (res.isSuccess){
-
+                _uiEvent.value = UIEvent.success
             } else {
-
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the message")
             }
+        }
+    }
+
+    fun readMessage(messages: Messages){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = messageUseCase.read(messages)
+            if (res.isSuccess){
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while updating the message")
+            }
+
         }
     }
 

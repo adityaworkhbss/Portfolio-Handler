@@ -32,15 +32,6 @@
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Click to view all"
-            android:textAppearance="?attr/textAppearanceCaption"
-            android:textColor="?attr/colorOnSurface"
-            android:alpha="0.7" />
-
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

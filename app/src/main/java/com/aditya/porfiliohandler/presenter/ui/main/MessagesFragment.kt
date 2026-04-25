@@ -1,15 +1,17 @@
 package com.aditya.porfiliohandler.presenter.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.MessagesAdapter
 import com.aditya.porfiliohandler.databinding.FragmentMessagesBinding
+import com.aditya.porfiliohandler.presenter.ResponseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 
 class MessagesFragment : Fragment() {
@@ -34,9 +36,15 @@ class MessagesFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = MessagesAdapter(emptyList(),
-            onItemClick = { message ->
+            onItemDeleteClick = { message ->
                 viewModel.deleteMessage(message)
-            })
+            },
+
+            onItemReadClick = { message ->
+                viewModel.readMessage(message)
+            }
+
+            )
         binding.messagesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.messagesRecyclerView.adapter = adapter
     }
@@ -53,6 +61,34 @@ class MessagesFragment : Fragment() {
                 adapter.updateItems(messages)
             }
         }
+
+        viewModel.uiEvent.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is UIEvent.ShowToast -> {
+                    showProgress(false)
+                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+                is UIEvent.ShowError -> {
+                    showProgress(false)
+                    showErrorDialog(event.message)
+                }
+                is UIEvent.loading -> {
+                    showProgress(true)
+                }
+                is UIEvent.success -> {
+                    showProgress(false)
+                }
+            }
+        }
+
+    }
+
+    fun showProgress(toShow: Boolean) {
+        binding.progressBar.isVisible = toShow
+    }
+
+    fun showErrorDialog(message : String){
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {

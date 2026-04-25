@@ -35,9 +35,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = DashboardGridAdapter(emptyList()) { item ->
-            findNavController().navigate(item.navigationId)
-        }
+        adapter = DashboardGridAdapter(emptyList())
 
         binding.dashboardRecyclerView.layoutManager =
             GridLayoutManager(

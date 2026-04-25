@@ -25,6 +25,10 @@ class UserRepositoryImpl(
         )
     }
 
+    override suspend fun readMessage(messages: Messages): Result<Unit> {
+        return dataSource.readMessage(messages)
+    }
+
     override suspend fun deleteMessage(messages: Messages): Result<Unit> {
         return dataSource.deleteMessage(messages)
     }

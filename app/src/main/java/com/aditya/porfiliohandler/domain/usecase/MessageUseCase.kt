@@ -7,4 +7,5 @@ class MessageUseCase(
     private val repository: UserRepository
 ) {
     suspend fun delete(messages: Messages) = repository.deleteMessage(messages)
+    suspend fun read(messages: Messages) = repository.readMessage(messages)
 }

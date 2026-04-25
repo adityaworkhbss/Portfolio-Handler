@@ -8,7 +8,7 @@ import com.aditya.porfiliohandler.presenter.ui.main.DashboardItem
 
 class DashboardGridAdapter(
     private var items: List<DashboardItem>,
-    private val onItemClick: (DashboardItem) -> Unit
+//    private val onItemClick: (DashboardItem) -> Unit
 ) : RecyclerView.Adapter<DashboardGridAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: DashboardGridBinding) : RecyclerView.ViewHolder(binding.root)
@@ -28,9 +28,9 @@ class DashboardGridAdapter(
         holder.binding.title.text = item.title
         holder.binding.titleCount.text = item.count.toString()
 
-        holder.itemView.setOnClickListener {
-            onItemClick(item)
-        }
+//        holder.itemView.setOnClickListener {
+//            onItemClick(item)
+//        }
     }
 
     override fun getItemCount(): Int {

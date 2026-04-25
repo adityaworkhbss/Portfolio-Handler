@@ -86,4 +86,17 @@ class UserDataSource(
             Result.failure(e)
         }
     }
+
+    suspend fun readMessage(messages: Messages) : Result<Unit> {
+        return try {
+            db.collection("messages")
+                .document(messages.id)
+                .update("read", true)
+                .await()
+            Result.success(Unit)
+        } catch (e: Exception){
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
 }

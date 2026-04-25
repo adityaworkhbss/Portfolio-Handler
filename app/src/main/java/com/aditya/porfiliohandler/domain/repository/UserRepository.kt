@@ -10,4 +10,5 @@ import com.aditya.porfiliohandler.domain.model.Projects
 interface UserRepository {
     suspend fun getDashboard() : Dashboard
     suspend fun deleteMessage(messages: Messages) : Result<Unit>
+    suspend fun readMessage(messages: Messages) : Result<Unit>
 }

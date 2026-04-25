@@ -1,18 +1,21 @@
 package com.aditya.porfiliohandler.adapter
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.porfiliohandler.databinding.ItemMessageBinding
 import com.aditya.porfiliohandler.domain.model.Messages
-import com.aditya.porfiliohandler.presenter.ui.main.DashboardItem
 import java.text.SimpleDateFormat
 import java.util.Locale
+import androidx.core.net.toUri
 
 class MessagesAdapter(
     private var items: List<Messages>,
-    private val onItemClick: (Messages) -> Unit
+    private val onItemDeleteClick: (Messages) -> Unit,
+    private val onItemReadClick:(Messages) ->Unit
 ) : RecyclerView.Adapter<MessagesAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root)
@@ -26,6 +29,7 @@ class MessagesAdapter(
         return ViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
@@ -39,6 +43,8 @@ class MessagesAdapter(
         } else {
             holder.binding.newBadge.visibility = View.GONE
             holder.binding.unreadDot.visibility = View.GONE
+            holder.binding.visitedMessage.text = "Visited"
+            holder.binding.visitedMessage.isClickable = false
         }
 
         item.createdAt?.let { timestamp ->
@@ -49,10 +55,26 @@ class MessagesAdapter(
         }
 
         holder.binding.deleteMessageButton.setOnClickListener {
-            onItemClick(
+            onItemDeleteClick(
                 item
             )
         }
+
+        holder.binding.respondMessage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = "mailto:${item.email}".toUri()
+                putExtra(Intent.EXTRA_SUBJECT, "Response to your message")
+            }
+            holder.itemView.context.startActivity(intent)
+        }
+
+        holder.binding.visitedMessage.setOnClickListener {
+            onItemReadClick(
+                item
+            )
+        }
+
+
     }
 
     override fun getItemCount(): Int = items.size
