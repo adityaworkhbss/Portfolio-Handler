@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aditya.porfiliohandler.domain.model.*
 import com.aditya.porfiliohandler.domain.usecase.*
-import com.aditya.porfiliohandler.presenter.ResponseHandler.UIEvent
+import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import kotlinx.coroutines.launch
 
 class MainViewModel(

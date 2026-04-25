@@ -1,4 +1,4 @@
-package com.aditya.porfiliohandler.presenter.ResponseHandler
+package com.aditya.porfiliohandler.presenter.responseHandler
 
 sealed class UIEvent {
 

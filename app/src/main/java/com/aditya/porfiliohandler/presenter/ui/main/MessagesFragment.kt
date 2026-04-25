@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.MessagesAdapter
 import com.aditya.porfiliohandler.databinding.FragmentMessagesBinding
-import com.aditya.porfiliohandler.presenter.ResponseHandler.UIEvent
+import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 
 class MessagesFragment : Fragment() {
