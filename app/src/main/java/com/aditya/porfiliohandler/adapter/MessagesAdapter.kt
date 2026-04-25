@@ -44,7 +44,7 @@ class MessagesAdapter(
             holder.binding.newBadge.visibility = View.GONE
             holder.binding.unreadDot.visibility = View.GONE
             holder.binding.visitedMessage.text = "Visited"
-            holder.binding.visitedMessage.isClickable = false
+            holder.binding.visitedMessage.isEnabled = false
         }
 
         item.createdAt?.let { timestamp ->
