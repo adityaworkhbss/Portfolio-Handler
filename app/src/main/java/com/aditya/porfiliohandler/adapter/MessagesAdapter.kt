@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.porfiliohandler.databinding.ItemMessageBinding
 import com.aditya.porfiliohandler.domain.model.Messages
+import com.aditya.porfiliohandler.presenter.ui.main.DashboardItem
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class MessagesAdapter(
-    private var items: List<Messages>
+    private var items: List<Messages>,
+    private val onItemClick: (Messages) -> Unit
 ) : RecyclerView.Adapter<MessagesAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root)
@@ -31,7 +33,6 @@ class MessagesAdapter(
         holder.binding.messageEmail.text = item.email
         holder.binding.messagePreview.text = item.message
 
-        // NEW badge and unread dot for unread messages
         if (!item.read) {
             holder.binding.newBadge.visibility = View.VISIBLE
             holder.binding.unreadDot.visibility = View.VISIBLE
@@ -40,12 +41,17 @@ class MessagesAdapter(
             holder.binding.unreadDot.visibility = View.GONE
         }
 
-        // Format timestamp
         item.createdAt?.let { timestamp ->
             val dateFormat = SimpleDateFormat("MMM dd, yyyy, hh:mm a", Locale.getDefault())
             holder.binding.messageTimestamp.text = dateFormat.format(timestamp.toDate())
         } ?: run {
             holder.binding.messageTimestamp.text = ""
+        }
+
+        holder.binding.deleteMessageButton.setOnClickListener {
+            onItemClick(
+                item
+            )
         }
     }
 

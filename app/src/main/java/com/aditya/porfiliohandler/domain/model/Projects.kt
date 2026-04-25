@@ -3,6 +3,7 @@ package com.aditya.porfiliohandler.domain.model
 import com.google.firebase.Timestamp
 
 data class Projects(
+    val id: String = "",
     val title: String = "",
     val description: String = "",
     val longDescription: String = "",

@@ -1,5 +1,6 @@
 package com.aditya.porfiliohandler.data.datasource
 
+import android.util.Log
 import com.aditya.porfiliohandler.domain.model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -23,10 +24,12 @@ class UserDataSource(
 
     suspend fun getProjects(): List<Projects> {
         return try {
-            db.collection("projects")
+            val snapshot = db.collection("projects")
                 .get()
                 .await()
-                .toObjects(Projects::class.java)
+            snapshot.documents.mapNotNull { doc ->
+                doc.toObject(Projects::class.java)?.copy(id = doc.id)
+            }
         } catch (e: Exception) {
             emptyList()
         }
@@ -34,10 +37,12 @@ class UserDataSource(
 
     suspend fun getMessages(): List<Messages> {
         return try {
-            db.collection("messages")
+            val snapshot = db.collection("messages")
                 .get()
                 .await()
-                .toObjects(Messages::class.java)
+            snapshot.documents.mapNotNull { doc ->
+                doc.toObject(Messages::class.java)?.copy(id = doc.id)
+            }
         } catch (e: Exception) {
             emptyList()
         }
@@ -45,10 +50,12 @@ class UserDataSource(
 
     suspend fun getBlogs(): List<Blogs> {
         return try {
-            db.collection("blogs")
+            val snapshot = db.collection("blogs")
                 .get()
                 .await()
-                .toObjects(Blogs::class.java)
+            snapshot.documents.mapNotNull { doc ->
+                doc.toObject(Blogs::class.java)?.copy(id = doc.id)
+            }
         } catch (e: Exception) {
             emptyList()
         }
@@ -56,12 +63,27 @@ class UserDataSource(
 
     suspend fun getExperiences(): List<Experience> {
         return try {
-            db.collection("experiences")
+            val snapshot = db.collection("experiences")
                 .get()
                 .await()
-                .toObjects(Experience::class.java)
+            snapshot.documents.mapNotNull { doc ->
+                doc.toObject(Experience::class.java)?.copy(id = doc.id)
+            }
         } catch (e: Exception) {
             emptyList()
+        }
+    }
+
+    suspend fun deleteMessage(messages: Messages) : Result<Unit> {
+        return try {
+             db.collection("messages")
+                .document(messages.id)
+                .delete()
+                .await()
+             Result.success(Unit)
+        } catch (e: Exception){
+            e.printStackTrace()
+            Result.failure(e)
         }
     }
 }

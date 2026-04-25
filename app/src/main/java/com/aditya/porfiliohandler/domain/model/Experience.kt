@@ -1,6 +1,7 @@
 package com.aditya.porfiliohandler.domain.model
 
 data class Experience(
+    val id: String = "",
     val role: String = "",
     val company: String = "",
     val description: String = "",

@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    // Android 13+ notification permission launcher
     private val notificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             Log.d(TAG, "POST_NOTIFICATIONS permission granted: $granted")
@@ -111,7 +110,6 @@ class MainActivity : AppCompatActivity() {
     private fun handleNotificationDeepLink(intent: Intent?) {
         if (intent?.getStringExtra("navigate_to") == "messages") {
             navController.navigate(R.id.messagesFragment)
-            // Clear the extra so rotating the screen doesn't re-navigate
             intent.removeExtra("navigate_to")
         }
     }

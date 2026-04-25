@@ -13,7 +13,9 @@ class MainViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(
-                dashboardUseCase = DashboardUseCase(userRepository)
+                dashboardUseCase = DashboardUseCase(userRepository),
+                messageUseCase = MessageUseCase(userRepository),
+
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
