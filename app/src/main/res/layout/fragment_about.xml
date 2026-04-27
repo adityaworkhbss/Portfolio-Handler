@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+
+
         <!-- Header Section -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/avatarImage"
@@ -28,66 +30,92 @@
             app:strokeWidth="2dp"
             tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/nameText"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Aditya Sharma"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/avatarImage" />
+            android:hint="Full Name"
+            app:layout_constraintTop_toBottomOf="@id/avatarImage">
 
-        <TextView
-            android:id="@+id/roleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Android Developer"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:textColor="?attr/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameText" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Aditya Sharma" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/taglineText"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/roleLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Building premium digital experiences"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:alpha="0.8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/roleText" />
+            android:hint="Role"
+            app:layout_constraintTop_toBottomOf="@id/nameLayout">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/availabilityCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="#4CAF50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/taglineText">
-
-            <TextView
-                android:id="@+id/availabilityText"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/roleEdit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
-                android:text="Available for Hire"
-                android:textAppearance="?attr/textAppearanceCaption"
-                android:textColor="#4CAF50"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
+                android:inputType="text"
+                android:text="Android Developer" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taglineLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Tagline"
+            app:layout_constraintTop_toBottomOf="@id/roleLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taglineEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="Building premium digital experiences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Availability Status Dropdown -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/availabilityStatusLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Status Color"
+            app:layout_constraintTop_toBottomOf="@id/taglineLayout">
+
+            <AutoCompleteTextView
+                android:id="@+id/availabilityStatusEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:simpleItems="@array/availability_status_options" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Availability Text -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/availabilityTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Status Message"
+            app:layout_constraintTop_toBottomOf="@id/availabilityStatusLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/availabilityTextEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="Available for Hire" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Stats Section -->
         <androidx.recyclerview.widget.RecyclerView
@@ -97,7 +125,7 @@
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/availabilityCard"
+            app:layout_constraintTop_toBottomOf="@id/availabilityTextLayout"
             tools:listitem="@layout/item_stat" />
 
         <!-- Bio Section -->
@@ -111,24 +139,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/statsRecyclerView" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/bioCard"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bioLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            android:hint="Bio"
             app:layout_constraintTop_toBottomOf="@id/bioLabel">
 
-            <TextView
-                android:id="@+id/bioText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bioEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:lineSpacingExtra="4dp" />
-        </com.google.android.material.card.MaterialCardView>
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:text="Bio content goes here..." />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Skills Section -->
         <TextView
@@ -139,7 +167,18 @@
             android:text="Skills &amp; Expertise"
             android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bioCard" />
+            app:layout_constraintTop_toBottomOf="@id/bioLayout" />
+
+        <ImageButton
+            android:id="@+id/btnAddSkill"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_constraintBottom_toBottomOf="@id/skillsLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/skillsLabel"
+            app:tint="?attr/colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/skillsRecyclerView"
@@ -175,13 +214,21 @@
                         android:layout_height="20dp"
                         android:src="@android:drawable/ic_dialog_email"
                         app:tint="?attr/colorPrimary" />
-                    <TextView
-                        android:id="@+id/emailText"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="aditya@example.com"
-                        android:textAppearance="?attr/textAppearanceBody2" />
+                        android:hint="Email">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/emailEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:text="aditya@example.com" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,13 +242,21 @@
                         android:layout_height="20dp"
                         android:src="@android:drawable/ic_menu_mylocation"
                         app:tint="?attr/colorPrimary" />
-                    <TextView
-                        android:id="@+id/locationText"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/locationLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="New Delhi, India"
-                        android:textAppearance="?attr/textAppearanceBody2" />
+                        android:hint="Location">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/locationEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="New Delhi, India" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -217,6 +272,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/infoCard" />
 
+        <ImageButton
+            android:id="@+id/btnAddSocial"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_constraintBottom_toBottomOf="@id/socialLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/socialLabel"
+            app:tint="?attr/colorPrimary" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/socialRecyclerView"
             android:layout_width="match_parent"
@@ -226,18 +292,32 @@
             tools:listitem="@layout/item_social_link" />
 
         <!-- Resume Button -->
+        <!-- Update Button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/resumeButton"
+            android:id="@+id/updateAboutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:padding="12dp"
+            android:text="Update Profile"
+            android:enabled="false"
+            app:cornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/socialRecyclerView" />
+
+        <!-- Resume Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/resumeButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="Download Resume"
             app:cornerRadius="8dp"
             app:icon="@android:drawable/ic_menu_save"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/socialRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@id/updateAboutButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

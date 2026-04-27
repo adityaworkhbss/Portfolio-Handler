@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="availability_status_options">
+        <item>Green</item>
+        <item>Orange</item>
+        <item>Red</item>
+    </string-array>
+</resources>

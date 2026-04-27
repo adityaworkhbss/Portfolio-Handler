@@ -99,4 +99,23 @@ class UserDataSource(
             Result.failure(e)
         }
     }
+
+    suspend fun updateStat(stat: Stat): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedStats = about?.stats?.map {
+                    if (it.label == stat.label) stat else it
+                }
+                db.collection("about").document(doc.id).update("stats", updatedStats).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.aditya.porfiliohandler.domain.model.*
 import com.aditya.porfiliohandler.domain.usecase.*
 import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
+import com.google.common.math.Stats
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val dashboardUseCase: DashboardUseCase,
     private val messageUseCase: MessageUseCase,
+    private val aboutUseCase: AboutUseCase,
 ) : ViewModel() {
 
     private val _dashboard = MutableLiveData<Dashboard>()
@@ -51,6 +53,19 @@ class MainViewModel(
                 _uiEvent.value = UIEvent.ShowError("Error while updating the message")
             }
 
+        }
+    }
+
+    fun updateStat(stat: Stat){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = aboutUseCase.updateStats(stat)
+            if(res.isSuccess){
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while updating the stat")
+            }
         }
     }
 
