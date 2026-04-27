@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.ExperienceAdapter
+import com.aditya.porfiliohandler.bottomsheets.ExperienceBottomSheet
 import com.aditya.porfiliohandler.databinding.FragmentExperienceBinding
+import com.aditya.porfiliohandler.domain.model.Experience
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 
 class ExperienceFragment : Fragment() {
@@ -27,12 +29,17 @@ class ExperienceFragment : Fragment() {
 
         setupRecyclerView()
         observeViewModel()
+        setupAddButton()
 
         return binding.root
     }
 
     private fun setupRecyclerView() {
-        adapter = ExperienceAdapter(emptyList())
+        adapter = ExperienceAdapter(emptyList(),
+            onExperienceClick = { experience ->
+                bottomSheetExperienceEdit(experience)
+            }
+        )
         binding.experienceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.experienceRecyclerView.adapter = adapter
     }
@@ -49,6 +56,26 @@ class ExperienceFragment : Fragment() {
                 adapter.updateItems(experience)
             }
         }
+    }
+
+    private fun setupAddButton() {
+        binding.fabAddExperience.setOnClickListener {
+            bottomSheetExperienceAdd()
+        }
+    }
+
+    private fun bottomSheetExperienceEdit(experience: Experience) {
+        val sheet = ExperienceBottomSheet(experience) { updatedExperience ->
+            viewModel.updateExperience(updatedExperience)
+        }
+        sheet.show(parentFragmentManager, "ExperienceEditBottomSheet")
+    }
+
+    private fun bottomSheetExperienceAdd() {
+        val sheet = ExperienceBottomSheet { newExperience ->
+            viewModel.addExperience(newExperience)
+        }
+        sheet.show(parentFragmentManager, "ExperienceAddBottomSheet")
     }
 
     override fun onDestroyView() {

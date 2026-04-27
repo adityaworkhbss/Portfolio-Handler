@@ -6,6 +6,8 @@ import com.aditya.porfiliohandler.domain.model.Dashboard
 import com.aditya.porfiliohandler.domain.model.Experience
 import com.aditya.porfiliohandler.domain.model.Messages
 import com.aditya.porfiliohandler.domain.model.Projects
+import com.aditya.porfiliohandler.domain.model.SkillCategory
+import com.aditya.porfiliohandler.domain.model.SocialLink
 import com.aditya.porfiliohandler.domain.model.Stat
 import com.aditya.porfiliohandler.domain.repository.UserRepository
 import kotlinx.coroutines.async
@@ -43,11 +45,35 @@ class UserRepositoryImpl(
         return dataSource.updateStat(stat)
     }
 
+    override suspend fun updateSocialLink(oldSocialLink: SocialLink, newSocialLink: SocialLink): Result<Unit> {
+        return dataSource.updateSocialLink(oldSocialLink, newSocialLink)
+    }
+
+    override suspend fun addSocialLink(socialLink: SocialLink): Result<Unit> {
+        return dataSource.addSocialLink(socialLink)
+    }
+
+    override suspend fun updateSkillCategory(oldSkillCategory: SkillCategory, newSkillCategory: SkillCategory): Result<Unit> {
+        return dataSource.updateSkillCategory(oldSkillCategory, newSkillCategory)
+    }
+
+    override suspend fun addSkillCategory(skillCategory: SkillCategory): Result<Unit> {
+        return dataSource.addSkillCategory(skillCategory)
+    }
+
     override suspend fun updateProject(project: Projects): Result<Unit> {
         return dataSource.updateProject(project)
+    }
+
+    override suspend fun addProject(project: Projects): Result<Unit> {
+        return dataSource.addProject(project)
     }
 
     override suspend fun updateExperience(experience: Experience): Result<Unit> {
         return dataSource.updateExperience(experience)
     }
-}
+
+    override suspend fun addExperience(experience: Experience): Result<Unit> {
+        return dataSource.addExperience(experience)
+    }
+}

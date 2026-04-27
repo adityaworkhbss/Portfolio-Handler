@@ -6,6 +6,8 @@ import com.aditya.porfiliohandler.domain.model.Dashboard
 import com.aditya.porfiliohandler.domain.model.Experience
 import com.aditya.porfiliohandler.domain.model.Messages
 import com.aditya.porfiliohandler.domain.model.Projects
+import com.aditya.porfiliohandler.domain.model.SkillCategory
+import com.aditya.porfiliohandler.domain.model.SocialLink
 import com.aditya.porfiliohandler.domain.model.Stat
 
 interface UserRepository {
@@ -15,11 +17,15 @@ interface UserRepository {
 
     suspend fun updateStat(stat: Stat) : Result<Unit>
 
+    suspend fun updateSocialLink(oldSocialLink: SocialLink, newSocialLink: SocialLink) : Result<Unit>
+    suspend fun addSocialLink(socialLink: SocialLink) : Result<Unit>
+
+    suspend fun updateSkillCategory(oldSkillCategory: SkillCategory, newSkillCategory: SkillCategory) : Result<Unit>
+    suspend fun addSkillCategory(skillCategory: SkillCategory) : Result<Unit>
+
     suspend fun updateProject(projects: Projects) : Result<Unit>
     suspend fun addProject(projects: Projects) : Result<Unit>
 
     suspend fun updateExperience(experience: Experience) : Result<Unit>
     suspend fun addExperience(experience: Experience) : Result<Unit>
-
-
 }

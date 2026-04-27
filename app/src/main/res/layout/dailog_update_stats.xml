@@ -5,32 +5,42 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Stat"
+        android:textAppearance="@style/TextAppearance.Portfolio.Heading"
+        android:layout_marginBottom="16dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etValueLayout"
+        style="@style/Widget.Portfolio.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Value">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/fg_primary"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etLabelLayout"
+        style="@style/Widget.Portfolio.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Label"
         android:layout_marginTop="12dp">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/fg_primary"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,14 +51,16 @@
         android:layout_marginTop="20dp"
         android:gravity="end">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancel"
+            style="@style/Widget.Portfolio.Button.Outline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnUpdate"
+            style="@style/Widget.Portfolio.Button.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update"

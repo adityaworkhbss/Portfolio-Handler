@@ -1,0 +1,223 @@
+<resources>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- TEXT APPEARANCES                               -->
+    <!-- ══════════════════════════════════════════════ -->
+
+    <!-- Base Body Text — Inter 15sp, primary white -->
+    <style name="TextAppearance.Portfolio.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <!-- Muted Body Text -->
+    <style name="TextAppearance.Portfolio.Body.Muted">
+        <item name="android:textColor">@color/fg_muted</item>
+    </style>
+
+    <!-- Eyebrow / Meta Text — Monospace, uppercase, tracked -->
+    <style name="TextAppearance.Portfolio.Eyebrow" parent="">
+        <item name="fontFamily">@font/mono</item>
+        <item name="android:fontFamily">@font/mono</item>
+        <item name="android:textColor">@color/fg_subtle</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <!-- Large Display Heading — Inter bold, tight tracking -->
+    <style name="TextAppearance.Portfolio.Display" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.04</item>
+    </style>
+
+    <!-- Section Heading — Inter semibold -->
+    <style name="TextAppearance.Portfolio.Heading" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <!-- Subtitle — Inter, slightly muted -->
+    <style name="TextAppearance.Portfolio.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Caption — Small muted text -->
+    <style name="TextAppearance.Portfolio.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/fg_subtle</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Serif Italic Accent — For emphasis in headings -->
+    <style name="TextAppearance.Portfolio.SerifItalic" parent="">
+        <item name="fontFamily">@font/serif</item>
+        <item name="android:fontFamily">@font/serif</item>
+        <item name="android:textColor">@color/accent_primary</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <!-- Stat Value — Large accent number -->
+    <style name="TextAppearance.Portfolio.StatValue" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/mono</item>
+        <item name="android:fontFamily">@font/mono</item>
+        <item name="android:textColor">@color/accent_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Badge Text — Small pill label -->
+    <style name="TextAppearance.Portfolio.Badge" parent="">
+        <item name="fontFamily">@font/mono</item>
+        <item name="android:fontFamily">@font/mono</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- WIDGET STYLES                                  -->
+    <!-- ══════════════════════════════════════════════ -->
+
+    <!-- Primary Button — Lime bg, dark text, pill shape -->
+    <style name="Widget.Portfolio.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/accent_primary</item>
+        <item name="android:textColor">@color/bg_primary</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="rippleColor">@color/accent_deep</item>
+    </style>
+
+    <!-- Outline / Ghost Button -->
+    <style name="Widget.Portfolio.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="backgroundTint">@color/bg_button_outline</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="strokeColor">@color/border_button_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="rippleColor">@color/ripple_light</item>
+    </style>
+
+    <!-- Text Button — Lime text, no background -->
+    <style name="Widget.Portfolio.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/accent_primary</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="rippleColor">@color/accent_glow</item>
+    </style>
+
+    <!-- MaterialCardView — Glassmorphism default -->
+    <style name="Widget.Portfolio.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/bg_card</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/border_default</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="rippleColor">@color/ripple_light</item>
+    </style>
+
+    <!-- TextInputLayout — Dark filled box with accent focus -->
+    <style name="Widget.Portfolio.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/bg_card</item>
+        <item name="boxStrokeColor">@color/accent_primary</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="hintTextColor">@color/accent_primary</item>
+        <item name="android:textColorHint">@color/fg_subtle</item>
+        <item name="helperTextTextColor">@color/fg_faint</item>
+        <item name="errorTextColor">@color/status_error</item>
+        <item name="cursorColor">@color/accent_primary</item>
+    </style>
+
+    <!-- Outlined TextInputLayout variant -->
+    <style name="Widget.Portfolio.TextInputLayout.Outlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/border_strong</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="hintTextColor">@color/accent_primary</item>
+        <item name="android:textColorHint">@color/fg_subtle</item>
+        <item name="helperTextTextColor">@color/fg_faint</item>
+        <item name="errorTextColor">@color/status_error</item>
+        <item name="cursorColor">@color/accent_primary</item>
+    </style>
+
+    <!-- FAB — Lime accent -->
+    <style name="Widget.Portfolio.FAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/accent_primary</item>
+        <item name="tint">@color/bg_primary</item>
+        <item name="rippleColor">@color/accent_deep</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Portfolio.FAB</item>
+    </style>
+
+    <style name="ShapeAppearance.Portfolio.FAB" parent="">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Toolbar — Dark, transparent feel -->
+    <style name="Widget.Portfolio.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/bg_primary</item>
+        <item name="titleTextColor">@color/fg_primary</item>
+        <item name="subtitleTextColor">@color/fg_muted</item>
+    </style>
+
+    <!-- Chip — Badge-style pills -->
+    <style name="Widget.Portfolio.Chip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/badge_bg</item>
+        <item name="chipStrokeColor">@color/badge_border</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">100dp</item>
+        <item name="android:textColor">@color/fg_primary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="chipMinHeight">28dp</item>
+    </style>
+
+    <!-- Switch — Lime when checked -->
+    <style name="Widget.Portfolio.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@color/accent_primary</item>
+        <item name="trackTint">@color/fg_faint</item>
+    </style>
+
+    <!-- Navigation View (Drawer) -->
+    <style name="Widget.Portfolio.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:background">@color/drawer_bg</item>
+        <item name="itemTextColor">@color/fg_muted</item>
+        <item name="itemIconTint">@color/fg_muted</item>
+        <item name="itemShapeAppearanceOverlay">@style/ShapeAppearance.Portfolio.NavItem</item>
+    </style>
+
+    <style name="ShapeAppearance.Portfolio.NavItem" parent="">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+</resources>

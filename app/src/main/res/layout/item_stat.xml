@@ -4,8 +4,11 @@
     android:layout_width="120dp"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/border_default"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,9 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10+"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="?attr/colorPrimary"
-            android:textStyle="bold" />
+            android:textAppearance="@style/TextAppearance.Portfolio.StatValue" />
 
         <TextView
             android:id="@+id/statLabel"
@@ -30,7 +31,6 @@
             android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="Projects"
-            android:textAppearance="?attr/textAppearanceCaption"
-            android:alpha="0.8" />
+            android:textAppearance="@style/TextAppearance.Portfolio.Caption" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

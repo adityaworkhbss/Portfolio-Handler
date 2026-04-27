@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.ProjectsAdapter
+import com.aditya.porfiliohandler.bottomsheets.ProjectBottomSheet
 import com.aditya.porfiliohandler.databinding.FragmentProjectsBinding
 import com.aditya.porfiliohandler.domain.model.Projects
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
@@ -28,6 +29,7 @@ class ProjectsFragment : Fragment() {
 
         setupRecyclerView()
         observeViewModel()
+        setupAddButton()
 
         return binding.root
     }
@@ -57,8 +59,24 @@ class ProjectsFragment : Fragment() {
         }
     }
 
-    private fun bottomSheetProjectEdit(projects: Projects){
+    private fun setupAddButton() {
+        binding.fabAddProject.setOnClickListener {
+            bottomSheetProjectAdd()
+        }
+    }
 
+    private fun bottomSheetProjectEdit(project: Projects) {
+        val sheet = ProjectBottomSheet(project) { updatedProject ->
+            viewModel.updateProject(updatedProject)
+        }
+        sheet.show(parentFragmentManager, "ProjectEditBottomSheet")
+    }
+
+    private fun bottomSheetProjectAdd() {
+        val sheet = ProjectBottomSheet { newProject ->
+            viewModel.addProject(newProject)
+        }
+        sheet.show(parentFragmentManager, "ProjectAddBottomSheet")
     }
 
     override fun onDestroyView() {

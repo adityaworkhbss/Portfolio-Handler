@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.AboutSkillsAdapter
 import com.aditya.porfiliohandler.adapter.AboutSocialAdapter
 import com.aditya.porfiliohandler.adapter.AboutStatsGridAdapter
-import com.aditya.porfiliohandler.databinding.DailogUpdateStatsBinding
+import com.aditya.porfiliohandler.bottomsheets.AboutStatBottomSheet
+import com.aditya.porfiliohandler.bottomsheets.SkillCategoryBottomSheet
+import com.aditya.porfiliohandler.bottomsheets.SocialLinkBottomSheet
 import com.aditya.porfiliohandler.databinding.FragmentAboutBinding
 import com.aditya.porfiliohandler.domain.model.About
+import com.aditya.porfiliohandler.domain.model.SkillCategory
 import com.aditya.porfiliohandler.domain.model.SocialLink
 import com.aditya.porfiliohandler.domain.model.Stat
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
@@ -51,6 +54,7 @@ class AboutFragment : Fragment() {
                 setStats()
                 setSocialLinks()
                 setSkills()
+                setupAddButtons()
             }
         }
     }
@@ -123,53 +127,57 @@ class AboutFragment : Fragment() {
                 false
             )
 
-        val skillsAdapter = AboutSkillsAdapter(skills)
+        val skillsAdapter = AboutSkillsAdapter(skills,
+            onSkillCategoryClick = { skillCategory ->
+                showSkillCategoryUpdateDialog(skillCategory)
+            }
+        )
         binding.skillsRecyclerView.adapter = skillsAdapter
     }
 
-    fun showStatsUpdateDialog(stat: Stat) {
+    private fun setupAddButtons() {
+        binding.btnAddSocial.setOnClickListener {
+            showSocialAddDialog()
+        }
 
-        val binding = DailogUpdateStatsBinding.inflate(layoutInflater)
-
-        binding.etLabel.setText(stat.label)
-        binding.etValue.setText(stat.value)
-
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle("Update Stat")
-            .setView(binding.root)
-            .setCancelable(false)
-            .setNegativeButton("Cancel") { dialogInterface, _ ->
-                dialogInterface.dismiss()
-            }
-            .setPositiveButton("Update", null)
-            .create()
-
-        dialog.show()
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-
-            val updatedValue = binding.etValue.text.toString().trim()
-            val updatedLabel = binding.etLabel.text.toString().trim()
-
-            if (updatedValue.isEmpty() || updatedLabel.isEmpty()) {
-                if (updatedValue.isEmpty()) binding.etValue.error = "Required"
-                if (updatedLabel.isEmpty()) binding.etLabel.error = "Required"
-                return@setOnClickListener
-            }
-
-            val updatedStat = stat.copy(
-                value = updatedValue,
-                label = updatedLabel
-            )
-
-            viewModel.updateStat(updatedStat)
-
-            dialog.dismiss()
+        binding.btnAddSkill.setOnClickListener {
+            showSkillCategoryAddDialog()
         }
     }
 
-    fun showSocialUpdateDialog(social : SocialLink){
+    fun showStatsUpdateDialog(stat: Stat) {
+        val sheet = AboutStatBottomSheet(stat) { updatedStat ->
+            viewModel.updateStat(updatedStat)
+        }
+        sheet.show(parentFragmentManager, "AboutStatBottomSheet")
+    }
 
+    fun showSocialUpdateDialog(social: SocialLink) {
+        val sheet = SocialLinkBottomSheet(social) { updatedSocial ->
+            viewModel.updateSocialLink(social, updatedSocial)
+        }
+        sheet.show(parentFragmentManager, "SocialLinkBottomSheet")
+    }
+
+    fun showSocialAddDialog() {
+        val sheet = SocialLinkBottomSheet { newSocial ->
+            viewModel.addSocialLink(newSocial)
+        }
+        sheet.show(parentFragmentManager, "SocialLinkAddBottomSheet")
+    }
+
+    fun showSkillCategoryUpdateDialog(skillCategory: SkillCategory) {
+        val sheet = SkillCategoryBottomSheet(skillCategory) { updatedSkill ->
+            viewModel.updateSkillCategory(skillCategory, updatedSkill)
+        }
+        sheet.show(parentFragmentManager, "SkillCategoryBottomSheet")
+    }
+
+    fun showSkillCategoryAddDialog() {
+        val sheet = SkillCategoryBottomSheet { newSkill ->
+            viewModel.addSkillCategory(newSkill)
+        }
+        sheet.show(parentFragmentManager, "SkillCategoryAddBottomSheet")
     }
 
     override fun onDestroyView() {

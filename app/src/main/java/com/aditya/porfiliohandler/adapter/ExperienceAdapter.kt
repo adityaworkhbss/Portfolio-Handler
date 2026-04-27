@@ -8,7 +8,8 @@ import com.aditya.porfiliohandler.databinding.ItemExperienceBinding
 import com.aditya.porfiliohandler.domain.model.Experience
 
 class ExperienceAdapter(
-    private var items: List<Experience>
+    private var items: List<Experience>,
+    private var onExperienceClick: (Experience) -> Unit = {}
 ) : RecyclerView.Adapter<ExperienceAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemExperienceBinding) : RecyclerView.ViewHolder(binding.root)
@@ -46,6 +47,10 @@ class ExperienceAdapter(
         } else {
             holder.binding.currentBadge.visibility = View.GONE
         }
+
+        holder.binding.root.setOnClickListener {
+            onExperienceClick(item)
+        }
     }
 
     override fun getItemCount(): Int = items.size
@@ -55,3 +60,4 @@ class ExperienceAdapter(
         notifyDataSetChanged()
     }
 }
+

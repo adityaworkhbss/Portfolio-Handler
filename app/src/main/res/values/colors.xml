@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- Legacy (keep for compatibility) -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Backgrounds (Surface)                          -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="bg_primary">#050607</color>
+    <color name="bg_elevated">#E60C0D0F</color>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Cards & Glassmorphism                          -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="bg_card">#04FFFFFF</color>
+    <color name="bg_card_hover">#09FFFFFF</color>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Borders                                        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="border_default">#0DFFFFFF</color>
+    <color name="border_strong">#1EFFFFFF</color>
+    <color name="border_accent">#26BEF264</color>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Foreground (Text)                              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="fg_primary">#FCFCFC</color>
+    <color name="fg_muted">#9BA1A6</color>
+    <color name="fg_subtle">#6E767C</color>
+    <color name="fg_faint">#4B5257</color>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Accents (Signature Lime)                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="accent_primary">#BEF264</color>
+    <color name="accent_bright">#D9F99D</color>
+    <color name="accent_dim">#A3E635</color>
+    <color name="accent_deep">#4D7C0F</color>
+    <color name="accent_glow">#2EBEF264</color>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- Semantic / Status                              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <color name="status_success">#4ADE80</color>
+    <color name="status_warning">#FBBF24</color>
+    <color name="status_error">#F87171</color>
+    <color name="status_info">#60A5FA</color>
+
+    <!-- Badge backgrounds -->
+    <color name="badge_bg">#0AFFFFFF</color>
+    <color name="badge_border">#0FFFFFFF</color>
+    <color name="badge_featured_bg">#1ABEF264</color>
+    <color name="badge_current_bg">#1A4ADE80</color>
+
+    <!-- Outline button -->
+    <color name="bg_button_outline">#05FFFFFF</color>
+    <color name="border_button_outline">#24FFFFFF</color>
+
+    <!-- Navigation Drawer -->
+    <color name="drawer_bg">#0A0B0D</color>
+    <color name="drawer_item_active">#12BEF264</color>
+
+    <!-- Ripple overlay -->
+    <color name="ripple_light">#14FFFFFF</color>
 </resources>

@@ -119,19 +119,156 @@ class UserDataSource(
         }
     }
 
+    suspend fun updateSocialLink(oldSocialLink: SocialLink, newSocialLink: SocialLink): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedLinks = about?.socialLinks?.map {
+                    if (it.platform == oldSocialLink.platform && it.url == oldSocialLink.url) newSocialLink else it
+                }
+                db.collection("about").document(doc.id).update("socialLinks", updatedLinks).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun addSocialLink(socialLink: SocialLink): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedLinks = (about?.socialLinks ?: emptyList()) + socialLink
+                db.collection("about").document(doc.id).update("socialLinks", updatedLinks).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun updateSkillCategory(oldSkillCategory: SkillCategory, newSkillCategory: SkillCategory): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedSkills = about?.skills?.map {
+                    if (it.category == oldSkillCategory.category) newSkillCategory else it
+                }
+                db.collection("about").document(doc.id).update("skills", updatedSkills).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun addSkillCategory(skillCategory: SkillCategory): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedSkills = (about?.skills ?: emptyList()) + skillCategory
+                db.collection("about").document(doc.id).update("skills", updatedSkills).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     suspend fun updateProject(project: Projects): Result<Unit> {
-        return Result.success(Unit)
+        return try {
+            val data = hashMapOf(
+                "title" to project.title,
+                "description" to project.description,
+                "longDescription" to project.longDescription,
+                "coverImage" to project.coverImage,
+                "githubUrl" to project.githubUrl,
+                "liveUrl" to project.liveUrl,
+                "featured" to project.featured,
+                "order" to project.order,
+                "techStack" to project.techStack,
+                "images" to project.images
+            )
+            db.collection("projects").document(project.id).update(data as Map<String, Any>).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     suspend fun addProject(project: Projects): Result<Unit> {
-        return Result.success(Unit)
+        return try {
+            val data = hashMapOf(
+                "title" to project.title,
+                "description" to project.description,
+                "longDescription" to project.longDescription,
+                "coverImage" to project.coverImage,
+                "githubUrl" to project.githubUrl,
+                "liveUrl" to project.liveUrl,
+                "featured" to project.featured,
+                "order" to project.order,
+                "techStack" to project.techStack,
+                "images" to project.images
+            )
+            db.collection("projects").add(data).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     suspend fun updateExperience(experience: Experience): Result<Unit> {
-        return Result.success(Unit)
+        return try {
+            val data = hashMapOf(
+                "role" to experience.role,
+                "company" to experience.company,
+                "description" to experience.description,
+                "startDate" to experience.startDate,
+                "endDate" to experience.endDate,
+                "current" to experience.current,
+                "order" to experience.order,
+                "techStack" to experience.techStack
+            )
+            db.collection("experiences").document(experience.id).update(data as Map<String, Any>).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     suspend fun addExperience(experience: Experience): Result<Unit> {
-        return Result.success(Unit)
+        return try {
+            val data = hashMapOf(
+                "role" to experience.role,
+                "company" to experience.company,
+                "description" to experience.description,
+                "startDate" to experience.startDate,
+                "endDate" to experience.endDate,
+                "current" to experience.current,
+                "order" to experience.order,
+                "techStack" to experience.techStack
+            )
+            db.collection("experiences").add(data).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
+

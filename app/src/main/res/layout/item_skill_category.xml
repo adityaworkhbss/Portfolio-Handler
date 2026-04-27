@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="4dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/border_default"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,9 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mobile Development"
-            android:textAppearance="?attr/textAppearanceSubtitle2"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary" />
+            android:textAppearance="@style/TextAppearance.Portfolio.Eyebrow"
+            android:textColor="@color/accent_primary"
+            android:textAllCaps="true" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/skillChipGroup"

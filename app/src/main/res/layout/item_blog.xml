@@ -5,8 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="6dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/border_default"
+    app:strokeWidth="1dp"
+    app:rippleColor="@color/ripple_light">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,52 +31,33 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Blog Title"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.Portfolio.Subtitle" />
 
             <!-- Published Badge -->
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:id="@+id/publishedBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="#4CAF50"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="6dp"
-                    android:paddingVertical="1dp"
-                    android:text="Published"
-                    android:textColor="#4CAF50"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </com.google.android.material.card.MaterialCardView>
+                android:background="@drawable/bg_badge_published"
+                android:text="Published"
+                android:textColor="@color/status_success"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/mono"
+                android:visibility="gone" />
 
             <!-- Draft Badge -->
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:id="@+id/draftBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="#FF9800"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="6dp"
-                    android:paddingVertical="1dp"
-                    android:text="Draft"
-                    android:textColor="#FF9800"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </com.google.android.material.card.MaterialCardView>
+                android:background="@drawable/bg_badge_draft"
+                android:text="Draft"
+                android:textColor="@color/status_warning"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/mono"
+                android:visibility="gone" />
         </LinearLayout>
 
         <!-- Meta row: date + reading time -->
@@ -87,24 +72,23 @@
                 android:id="@+id/blogDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.7"
                 android:text="April 19, 2026"
-                android:textAppearance="?attr/textAppearanceCaption" />
+                android:textAppearance="@style/TextAppearance.Portfolio.Caption"
+                android:fontFamily="@font/mono" />
 
             <View
                 android:layout_width="4dp"
                 android:layout_height="4dp"
                 android:layout_marginHorizontal="8dp"
-                android:alpha="0.5"
-                android:background="?attr/colorOnSurface" />
+                android:background="@drawable/bg_separator_dot" />
 
             <TextView
                 android:id="@+id/blogReadingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.7"
                 android:text="7 min read"
-                android:textAppearance="?attr/textAppearanceCaption" />
+                android:textAppearance="@style/TextAppearance.Portfolio.Caption"
+                android:fontFamily="@font/mono" />
         </LinearLayout>
 
         <!-- Tags -->
