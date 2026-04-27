@@ -11,7 +11,8 @@ import com.aditya.porfiliohandler.domain.model.Projects
 import com.google.android.material.chip.Chip
 
 class ProjectsAdapter(
-    private var items: List<Projects>
+    private var items: List<Projects>,
+    private var onClickProjects: (Projects) -> Unit,
 ) : RecyclerView.Adapter<ProjectsAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemProjectBinding) : RecyclerView.ViewHolder(binding.root)
@@ -70,6 +71,10 @@ class ProjectsAdapter(
             }
         } else {
             holder.binding.liveButton.visibility = View.GONE
+        }
+
+        holder.binding.editButton.setOnClickListener {
+            onClickProjects(item)
         }
     }
 

@@ -118,4 +118,20 @@ class UserDataSource(
             Result.failure(e)
         }
     }
+
+    suspend fun updateProject(project: Projects): Result<Unit> {
+        return Result.success(Unit)
+    }
+
+    suspend fun addProject(project: Projects): Result<Unit> {
+        return Result.success(Unit)
+    }
+
+    suspend fun updateExperience(experience: Experience): Result<Unit> {
+        return Result.success(Unit)
+    }
+
+    suspend fun addExperience(experience: Experience): Result<Unit> {
+        return Result.success(Unit)
+    }
 }

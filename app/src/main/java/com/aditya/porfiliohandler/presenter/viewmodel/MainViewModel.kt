@@ -14,6 +14,8 @@ class MainViewModel(
     private val dashboardUseCase: DashboardUseCase,
     private val messageUseCase: MessageUseCase,
     private val aboutUseCase: AboutUseCase,
+    private val projectUseCase: ProjectUseCase,
+    private val experienceUseCase: ExperienceUseCase
 ) : ViewModel() {
 
     private val _dashboard = MutableLiveData<Dashboard>()
@@ -65,6 +67,58 @@ class MainViewModel(
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the stat")
+            }
+        }
+    }
+
+    fun addProject(project: Projects){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = projectUseCase.addProject(project)
+            if(res.isSuccess){
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while adding the project")
+            }
+        }
+    }
+
+    fun updateProject(project: Projects){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = projectUseCase.updateProject(project)
+            if(res.isSuccess){
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while updating the project")
+            }
+        }
+    }
+
+    fun addExperience(experience: Experience){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = experienceUseCase.addExperience(experience)
+            if(res.isSuccess){
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while adding the experience")
+            }
+        }
+    }
+
+    fun updateExperience(experience: Experience){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = experienceUseCase.updateExperience(experience)
+            if(res.isSuccess){
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while updating the experience")
             }
         }
     }

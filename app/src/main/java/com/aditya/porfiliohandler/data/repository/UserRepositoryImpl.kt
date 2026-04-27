@@ -42,4 +42,12 @@ class UserRepositoryImpl(
     override suspend fun updateStat(stat: Stat): Result<Unit> {
         return dataSource.updateStat(stat)
     }
+
+    override suspend fun updateProject(project: Projects): Result<Unit> {
+        return dataSource.updateProject(project)
+    }
+
+    override suspend fun updateExperience(experience: Experience): Result<Unit> {
+        return dataSource.updateExperience(experience)
+    }
 }

@@ -8,6 +8,7 @@ import com.aditya.porfiliohandler.domain.model.SocialLink
 
 class AboutSocialAdapter(
     private var items: List<SocialLink>,
+    private var onSocialClick : (SocialLink) -> Unit
 ) : RecyclerView.Adapter<AboutSocialAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemSocialLinkBinding) : RecyclerView.ViewHolder(binding.root)
@@ -26,6 +27,12 @@ class AboutSocialAdapter(
 
         holder.binding.socialName.text = item.platform
         holder.binding.socialUrl.text = item.url
+
+        holder.binding.root.setOnClickListener {
+            onSocialClick(
+                item
+            )
+        }
     }
 
     override fun getItemCount(): Int {

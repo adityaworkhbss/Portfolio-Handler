@@ -14,4 +14,12 @@ interface UserRepository {
     suspend fun readMessage(messages: Messages) : Result<Unit>
 
     suspend fun updateStat(stat: Stat) : Result<Unit>
+
+    suspend fun updateProject(projects: Projects) : Result<Unit>
+    suspend fun addProject(projects: Projects) : Result<Unit>
+
+    suspend fun updateExperience(experience: Experience) : Result<Unit>
+    suspend fun addExperience(experience: Experience) : Result<Unit>
+
+
 }

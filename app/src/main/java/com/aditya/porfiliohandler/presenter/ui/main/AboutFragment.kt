@@ -15,6 +15,7 @@ import com.aditya.porfiliohandler.adapter.AboutStatsGridAdapter
 import com.aditya.porfiliohandler.databinding.DailogUpdateStatsBinding
 import com.aditya.porfiliohandler.databinding.FragmentAboutBinding
 import com.aditya.porfiliohandler.domain.model.About
+import com.aditya.porfiliohandler.domain.model.SocialLink
 import com.aditya.porfiliohandler.domain.model.Stat
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 import com.bumptech.glide.Glide
@@ -102,7 +103,11 @@ class AboutFragment : Fragment() {
                 false
             )
 
-        val socialAdapter = AboutSocialAdapter(socialList)
+        val socialAdapter = AboutSocialAdapter(socialList,
+            onSocialClick = { social ->
+                showSocialUpdateDialog(social)
+            }
+        )
 
         binding.socialRecyclerView.adapter = socialAdapter
 
@@ -161,6 +166,10 @@ class AboutFragment : Fragment() {
 
             dialog.dismiss()
         }
+    }
+
+    fun showSocialUpdateDialog(social : SocialLink){
+
     }
 
     override fun onDestroyView() {

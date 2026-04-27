@@ -76,6 +76,14 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/editButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Edit"
+                android:textSize="12sp"/>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/githubButton"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
@@ -92,6 +100,8 @@
                 android:text="Live"
                 android:textSize="12sp"
                 android:visibility="gone" />
+
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

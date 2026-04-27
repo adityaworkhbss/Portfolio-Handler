@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.ProjectsAdapter
 import com.aditya.porfiliohandler.databinding.FragmentProjectsBinding
+import com.aditya.porfiliohandler.domain.model.Projects
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 
 class ProjectsFragment : Fragment() {
@@ -32,7 +33,12 @@ class ProjectsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ProjectsAdapter(emptyList())
+        adapter = ProjectsAdapter(emptyList(),
+                onClickProjects = { projects ->
+                    bottomSheetProjectEdit(projects)
+                }
+
+            )
         binding.projectsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.projectsRecyclerView.adapter = adapter
     }
@@ -49,6 +55,10 @@ class ProjectsFragment : Fragment() {
                 adapter.updateItems(projects)
             }
         }
+    }
+
+    private fun bottomSheetProjectEdit(projects: Projects){
+
     }
 
     override fun onDestroyView() {
