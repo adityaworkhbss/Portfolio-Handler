@@ -13,6 +13,7 @@ import com.google.android.material.chip.Chip
 class ProjectsAdapter(
     private var items: List<Projects>,
     private var onClickProjects: (Projects) -> Unit,
+    private var onClickDeleteProjects: (Projects) -> Unit,
 ) : RecyclerView.Adapter<ProjectsAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemProjectBinding) : RecyclerView.ViewHolder(binding.root)
@@ -75,6 +76,10 @@ class ProjectsAdapter(
 
         holder.binding.editButton.setOnClickListener {
             onClickProjects(item)
+        }
+
+        holder.binding.deleteButton.setOnClickListener {
+            onClickDeleteProjects(item)
         }
     }
 

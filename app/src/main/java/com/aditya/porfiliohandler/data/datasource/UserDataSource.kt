@@ -191,6 +191,57 @@ class UserDataSource(
         }
     }
 
+    suspend fun deleteStat(stat: Stat): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedStats = about?.stats?.filter { it.label != stat.label }
+                db.collection("about").document(doc.id).update("stats", updatedStats).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun deleteSocialLink(socialLink: SocialLink): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedLinks = about?.socialLinks?.filter { it.platform != socialLink.platform || it.url != socialLink.url }
+                db.collection("about").document(doc.id).update("socialLinks", updatedLinks).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun deleteSkillCategory(skillCategory: SkillCategory): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+            if (doc != null) {
+                val about = doc.toObject(About::class.java)
+                val updatedSkills = about?.skills?.filter { it.category != skillCategory.category }
+                db.collection("about").document(doc.id).update("skills", updatedSkills).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("About document not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     suspend fun updateProject(project: Projects): Result<Unit> {
         return try {
             val data = hashMapOf(
@@ -233,6 +284,19 @@ class UserDataSource(
         }
     }
 
+    suspend fun deleteProject(project: Projects) : Result<Unit>{
+        return try {
+            db.collection("projects")
+                .document(project.id)
+                .delete()
+                .await()
+            Result.success(Unit)
+        } catch (e: Exception){
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
+
     suspend fun updateExperience(experience: Experience): Result<Unit> {
         return try {
             val data = hashMapOf(
@@ -267,6 +331,32 @@ class UserDataSource(
             db.collection("experiences").add(data).await()
             Result.success(Unit)
         } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun deleteExperience(experience: Experience) : Result<Unit>{
+        return try{
+            db.collection("experiences")
+                .document(experience.id)
+                .delete()
+                .await()
+            Result.success(Unit)
+        } catch (e: Exception){
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
+
+    suspend fun deleteBlog(blogs: Blogs) : Result<Unit>{
+        return try{
+            db.collection("blogs")
+                .document(blogs.id)
+                .delete()
+                .await()
+            Result.success(Unit)
+        } catch (e: Exception){
+            e.printStackTrace()
             Result.failure(e)
         }
     }

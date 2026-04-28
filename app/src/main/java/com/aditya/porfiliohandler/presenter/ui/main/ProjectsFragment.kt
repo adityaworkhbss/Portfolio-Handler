@@ -15,6 +15,7 @@ import com.aditya.porfiliohandler.databinding.FragmentProjectsBinding
 import com.aditya.porfiliohandler.domain.model.Projects
 import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ProjectsFragment : Fragment() {
 
@@ -41,8 +42,10 @@ class ProjectsFragment : Fragment() {
         adapter = ProjectsAdapter(emptyList(),
                 onClickProjects = { projects ->
                     bottomSheetProjectEdit(projects)
+                },
+                onClickDeleteProjects = { projects ->
+                    showAlertDelete(projects)
                 }
-
             )
         binding.projectsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.projectsRecyclerView.adapter = adapter
@@ -107,6 +110,22 @@ class ProjectsFragment : Fragment() {
 
     fun showErrorDialog(message : String){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    fun showAlertDelete(project: Projects) {
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Delete Project")
+            .setMessage("Are you sure you want to delete this project?")
+            .setCancelable(false)
+            .setPositiveButton("Delete") { dialog, _ ->
+                viewModel.deleteProject(project)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onDestroyView() {

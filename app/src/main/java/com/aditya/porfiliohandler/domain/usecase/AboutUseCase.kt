@@ -22,5 +22,14 @@ class AboutUseCase(
 
     suspend fun addSkillCategory(skillCategory: SkillCategory) =
         repository.addSkillCategory(skillCategory)
+
+    suspend fun deleteStat(stat: Stat) =
+        repository.deleteStat(stat)
+
+    suspend fun deleteSocialLink(socialLink: SocialLink) =
+        repository.deleteSocialLink(socialLink)
+
+    suspend fun deleteSkillCategory(skillCategory: SkillCategory) =
+        repository.deleteSkillCategory(skillCategory)
 }
 

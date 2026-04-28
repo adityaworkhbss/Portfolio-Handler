@@ -22,10 +22,17 @@ interface UserRepository {
 
     suspend fun updateSkillCategory(oldSkillCategory: SkillCategory, newSkillCategory: SkillCategory) : Result<Unit>
     suspend fun addSkillCategory(skillCategory: SkillCategory) : Result<Unit>
+    suspend fun deleteStat(stat: Stat) : Result<Unit>
+    suspend fun deleteSocialLink(socialLink: SocialLink) : Result<Unit>
+    suspend fun deleteSkillCategory(skillCategory: SkillCategory) : Result<Unit>
 
     suspend fun updateProject(projects: Projects) : Result<Unit>
     suspend fun addProject(projects: Projects) : Result<Unit>
+    suspend fun deleteProject(projects: Projects) : Result<Unit>
 
     suspend fun updateExperience(experience: Experience) : Result<Unit>
     suspend fun addExperience(experience: Experience) : Result<Unit>
+    suspend fun deleteExperience(experience: Experience) : Result<Unit>
+
+    suspend fun deleteBlog(blogs: Blogs) : Result<Unit>
 }

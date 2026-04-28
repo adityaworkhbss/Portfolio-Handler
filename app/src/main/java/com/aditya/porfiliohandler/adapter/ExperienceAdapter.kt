@@ -9,7 +9,8 @@ import com.aditya.porfiliohandler.domain.model.Experience
 
 class ExperienceAdapter(
     private var items: List<Experience>,
-    private var onExperienceClick: (Experience) -> Unit = {}
+    private var onExperienceClick: (Experience) -> Unit = {},
+    private var onExperienceDelete: (Experience) -> Unit = {}
 ) : RecyclerView.Adapter<ExperienceAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemExperienceBinding) : RecyclerView.ViewHolder(binding.root)
@@ -50,6 +51,10 @@ class ExperienceAdapter(
 
         holder.binding.root.setOnClickListener {
             onExperienceClick(item)
+        }
+
+        holder.binding.deleteButton.setOnClickListener {
+            onExperienceDelete(item)
         }
     }
 

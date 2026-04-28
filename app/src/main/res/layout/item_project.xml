@@ -77,6 +77,14 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteButton"
+                style="@style/Widget.Portfolio.Button.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Delete"
+                android:textSize="12sp"/>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/editButton"
                 style="@style/Widget.Portfolio.Button.Text"
                 android:layout_width="wrap_content"

@@ -8,4 +8,5 @@ class ProjectUseCase(
 ) {
     suspend fun updateProject(project: Projects) = repo.updateProject(project)
     suspend fun addProject(project: Projects) = repo.addProject(project)
+    suspend fun deleteProject(project: Projects) = repo.deleteProject(project)
 }

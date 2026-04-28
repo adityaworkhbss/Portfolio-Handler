@@ -15,6 +15,7 @@ import com.aditya.porfiliohandler.databinding.FragmentExperienceBinding
 import com.aditya.porfiliohandler.domain.model.Experience
 import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ExperienceFragment : Fragment() {
 
@@ -45,6 +46,9 @@ class ExperienceFragment : Fragment() {
         adapter = ExperienceAdapter(emptyList(),
             onExperienceClick = { experience ->
                 bottomSheetExperienceEdit(experience)
+            },
+            onExperienceDelete = { experience ->
+                showAlertDelete(experience)
             }
         )
         binding.experienceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -110,6 +114,21 @@ class ExperienceFragment : Fragment() {
 
     fun showErrorDialog(message : String){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showAlertDelete(experience: Experience) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Delete Experience")
+            .setMessage("Are you sure you want to delete this experience?")
+            .setCancelable(false)
+            .setPositiveButton("Delete") { dialog, _ ->
+                viewModel.deleteExperience(experience)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onDestroyView() {

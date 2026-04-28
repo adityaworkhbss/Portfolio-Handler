@@ -8,4 +8,5 @@ class ExperienceUseCase(
 ) {
     suspend fun updateExperience(experience: Experience) = repo.updateExperience(experience)
     suspend fun addExperience(experience: Experience) = repo.addExperience(experience)
+    suspend fun deleteExperience(experience: Experience) = repo.deleteExperience(experience)
 }

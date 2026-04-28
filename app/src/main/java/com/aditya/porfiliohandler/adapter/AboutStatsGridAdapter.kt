@@ -8,7 +8,8 @@ import com.aditya.porfiliohandler.domain.model.Stat
 
 class AboutStatsGridAdapter(
     private var items: List<Stat>,
-    private val onStatsClick: (Stat) -> Unit
+    private val onStatsClick: (Stat) -> Unit,
+    private val onStatsDelete: (Stat) -> Unit = {}
 ) : RecyclerView.Adapter<AboutStatsGridAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemStatBinding) : RecyclerView.ViewHolder(binding.root)
@@ -30,6 +31,10 @@ class AboutStatsGridAdapter(
 
         holder.binding.root.setOnClickListener {
             onStatsClick(item)
+        }
+
+        holder.binding.deleteButton.setOnClickListener {
+            onStatsDelete(item)
         }
     }
 

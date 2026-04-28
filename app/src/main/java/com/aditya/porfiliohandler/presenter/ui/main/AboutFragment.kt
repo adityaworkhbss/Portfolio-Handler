@@ -1,6 +1,5 @@
 package com.aditya.porfiliohandler.presenter.ui.main
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +24,7 @@ import com.aditya.porfiliohandler.domain.model.Stat
 import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AboutFragment : Fragment() {
 
@@ -104,6 +104,9 @@ class AboutFragment : Fragment() {
         val adapter = AboutStatsGridAdapter(statsList,
             onStatsClick = { stat ->
                 showStatsUpdateDialog(stat)
+            },
+            onStatsDelete = { stat ->
+                showAlertDeleteStat(stat)
             }
         )
         binding.statsRecyclerView.adapter = adapter
@@ -132,6 +135,9 @@ class AboutFragment : Fragment() {
         val socialAdapter = AboutSocialAdapter(socialList,
             onSocialClick = { social ->
                 showSocialUpdateDialog(social)
+            },
+            onSocialDelete = { social ->
+                showAlertDeleteSocialLink(social)
             }
         )
 
@@ -152,6 +158,9 @@ class AboutFragment : Fragment() {
         val skillsAdapter = AboutSkillsAdapter(skills,
             onSkillCategoryClick = { skillCategory ->
                 showSkillCategoryUpdateDialog(skillCategory)
+            },
+            onSkillCategoryDelete = { skillCategory ->
+                showAlertDeleteSkillCategory(skillCategory)
             }
         )
         binding.skillsRecyclerView.adapter = skillsAdapter
@@ -208,6 +217,51 @@ class AboutFragment : Fragment() {
 
     fun showErrorDialog(message : String){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showAlertDeleteStat(stat: Stat) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Delete Stat")
+            .setMessage("Are you sure you want to delete this stat?")
+            .setCancelable(false)
+            .setPositiveButton("Delete") { dialog, _ ->
+                viewModel.deleteStat(stat)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun showAlertDeleteSocialLink(socialLink: SocialLink) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Delete Social Link")
+            .setMessage("Are you sure you want to delete this social link?")
+            .setCancelable(false)
+            .setPositiveButton("Delete") { dialog, _ ->
+                viewModel.deleteSocialLink(socialLink)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun showAlertDeleteSkillCategory(skillCategory: SkillCategory) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Delete Skill Category")
+            .setMessage("Are you sure you want to delete this skill category?")
+            .setCancelable(false)
+            .setPositiveButton("Delete") { dialog, _ ->
+                viewModel.deleteSkillCategory(skillCategory)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onDestroyView() {

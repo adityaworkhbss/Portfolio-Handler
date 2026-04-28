@@ -8,7 +8,8 @@ import com.google.android.material.chip.Chip
 
 class AboutSkillsAdapter(
     private var items : List<SkillCategory>,
-    private var onSkillCategoryClick : (SkillCategory) -> Unit = {}
+    private var onSkillCategoryClick : (SkillCategory) -> Unit = {},
+    private var onSkillCategoryDelete: (SkillCategory) -> Unit = {}
 ) : RecyclerView.Adapter<AboutSkillsAdapter.ViewHolder>() {
 
     class ViewHolder(var binding: ItemSkillCategoryBinding) : RecyclerView.ViewHolder(binding.root)
@@ -40,6 +41,10 @@ class AboutSkillsAdapter(
 
         holder.binding.root.setOnClickListener {
             onSkillCategoryClick(item)
+        }
+
+        holder.binding.deleteButton.setOnClickListener {
+            onSkillCategoryDelete(item)
         }
     }
 

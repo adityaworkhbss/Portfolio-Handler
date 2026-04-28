@@ -213,6 +213,25 @@ class MainViewModel(
         }
     }
 
+    fun deleteProject(projects: Projects){
+        viewModelScope.launch {
+
+            _uiEvent.value = UIEvent.loading
+
+            val res = projectUseCase.deleteProject(projects)
+            if (res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedProjects = currentDashboard.projects.filter { it.id != projects.id }
+                    _dashboard.value = currentDashboard.copy(projects = updatedProjects)
+                }
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the projects")
+            }
+        }
+    }
+
     fun addExperience(experience: Experience){
         viewModelScope.launch {
             _uiEvent.value = UIEvent.loading
@@ -251,5 +270,82 @@ class MainViewModel(
         }
     }
 
+    fun deleteExperience(experience: Experience){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = experienceUseCase.deleteExperience(experience)
+            if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedExperience = currentDashboard.experience.filter { it.id != experience.id }
+                    _dashboard.value = currentDashboard.copy(experience = updatedExperience)
+                }
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the experience")
+            }
+        }
+    }
+
+    fun deleteStat(stat: Stat){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = aboutUseCase.deleteStat(stat)
+            if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedStats = currentAbout.stats.filter { it.label != stat.label }
+                    val updatedAbout = currentAbout.copy(stats = updatedStats)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the stat")
+            }
+        }
+    }
+
+    fun deleteSocialLink(socialLink: SocialLink){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = aboutUseCase.deleteSocialLink(socialLink)
+            if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedSocialLinks = currentAbout.socialLinks.filter { it.platform != socialLink.platform || it.url != socialLink.url }
+                    val updatedAbout = currentAbout.copy(socialLinks = updatedSocialLinks)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the social link")
+            }
+        }
+    }
+
+    fun deleteSkillCategory(skillCategory: SkillCategory){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = aboutUseCase.deleteSkillCategory(skillCategory)
+            if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedSkills = currentAbout.skills.filter { it.category != skillCategory.category }
+                    val updatedAbout = currentAbout.copy(skills = updatedSkills)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the skill category")
+            }
+        }
+    }
 }
 

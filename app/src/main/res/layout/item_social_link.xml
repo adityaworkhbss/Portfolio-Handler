@@ -45,10 +45,14 @@
                 android:maxLines="1" />
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@android:drawable/ic_menu_send"
-            app:tint="@color/fg_faint" />
+        <TextView
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Delete"
+            android:textColor="@color/status_error"
+            android:textSize="12sp"
+            android:fontFamily="@font/mono" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

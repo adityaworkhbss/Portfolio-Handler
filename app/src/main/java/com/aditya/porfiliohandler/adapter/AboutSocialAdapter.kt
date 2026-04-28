@@ -8,7 +8,8 @@ import com.aditya.porfiliohandler.domain.model.SocialLink
 
 class AboutSocialAdapter(
     private var items: List<SocialLink>,
-    private var onSocialClick : (SocialLink) -> Unit
+    private var onSocialClick : (SocialLink) -> Unit,
+    private var onSocialDelete: (SocialLink) -> Unit = {}
 ) : RecyclerView.Adapter<AboutSocialAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemSocialLinkBinding) : RecyclerView.ViewHolder(binding.root)
@@ -32,6 +33,10 @@ class AboutSocialAdapter(
             onSocialClick(
                 item
             )
+        }
+
+        holder.binding.deleteButton.setOnClickListener {
+            onSocialDelete(item)
         }
     }
 

@@ -12,6 +12,7 @@ import com.aditya.porfiliohandler.domain.model.Stat
 import com.aditya.porfiliohandler.domain.repository.UserRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlin.math.exp
 
 class UserRepositoryImpl(
     private val dataSource: UserDataSource
@@ -61,12 +62,28 @@ class UserRepositoryImpl(
         return dataSource.addSkillCategory(skillCategory)
     }
 
+    override suspend fun deleteStat(stat: Stat): Result<Unit> {
+        return dataSource.deleteStat(stat)
+    }
+
+    override suspend fun deleteSocialLink(socialLink: SocialLink): Result<Unit> {
+        return dataSource.deleteSocialLink(socialLink)
+    }
+
+    override suspend fun deleteSkillCategory(skillCategory: SkillCategory): Result<Unit> {
+        return dataSource.deleteSkillCategory(skillCategory)
+    }
+
     override suspend fun updateProject(project: Projects): Result<Unit> {
         return dataSource.updateProject(project)
     }
 
     override suspend fun addProject(project: Projects): Result<Unit> {
         return dataSource.addProject(project)
+    }
+
+    override suspend fun deleteProject(project: Projects): Result<Unit> {
+        return dataSource.deleteProject(project)
     }
 
     override suspend fun updateExperience(experience: Experience): Result<Unit> {
@@ -76,4 +93,12 @@ class UserRepositoryImpl(
     override suspend fun addExperience(experience: Experience): Result<Unit> {
         return dataSource.addExperience(experience)
     }
-}
+
+    override suspend fun deleteExperience(experience: Experience): Result<Unit> {
+        return dataSource.deleteExperience(experience)
+    }
+
+    override suspend fun deleteBlog(blogs: Blogs): Result<Unit> {
+        return dataSource.deleteBlog(blogs)
+    }
+}
