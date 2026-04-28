@@ -11,7 +11,9 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class BlogsAdapter(
-    private var items: List<Blogs>
+    private var items: List<Blogs>,
+    private var onDeleteClick: (Blogs) -> Unit,
+    private var onPublishClick: (Blogs) -> Unit,
 ) : RecyclerView.Adapter<BlogsAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemBlogBinding) : RecyclerView.ViewHolder(binding.root)
@@ -34,9 +36,11 @@ class BlogsAdapter(
         if (item.published) {
             holder.binding.publishedBadge.visibility = View.VISIBLE
             holder.binding.draftBadge.visibility = View.GONE
+            holder.binding.publishedButton.text = "Unpublish"
         } else {
             holder.binding.publishedBadge.visibility = View.GONE
             holder.binding.draftBadge.visibility = View.VISIBLE
+            holder.binding.publishedButton.text = "Publish"
         }
 
         // Reading time
@@ -60,6 +64,18 @@ class BlogsAdapter(
                 textSize = 11f
             }
             holder.binding.blogTagsChipGroup.addView(chip)
+        }
+
+        holder.binding.publishedButton.setOnClickListener {
+            onPublishClick(
+                item
+            )
+        }
+
+        holder.binding.deleteButton.setOnClickListener {
+            onDeleteClick(
+                item
+            )
         }
     }
 

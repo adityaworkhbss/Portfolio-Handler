@@ -17,7 +17,8 @@ class MainViewModelFactory(
                 messageUseCase = MessageUseCase(userRepository),
                 aboutUseCase = AboutUseCase(userRepository),
                 projectUseCase = ProjectUseCase(userRepository),
-                experienceUseCase = ExperienceUseCase(userRepository)
+                experienceUseCase = ExperienceUseCase(userRepository),
+                blogUseCase = BlogUseCase(userRepository)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

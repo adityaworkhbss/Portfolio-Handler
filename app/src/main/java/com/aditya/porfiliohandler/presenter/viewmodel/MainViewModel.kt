@@ -14,7 +14,8 @@ class MainViewModel(
     private val messageUseCase: MessageUseCase,
     private val aboutUseCase: AboutUseCase,
     private val projectUseCase: ProjectUseCase,
-    private val experienceUseCase: ExperienceUseCase
+    private val experienceUseCase: ExperienceUseCase,
+    private val blogUseCase: BlogUseCase
 ) : ViewModel() {
 
     private val _dashboard = MutableLiveData<Dashboard>()
@@ -57,7 +58,7 @@ class MainViewModel(
                 val currentDashboard = _dashboard.value
                 if(currentDashboard != null){
                     val updatedMessages = currentDashboard.messages.map {
-                        if(it.id == messages.id) messages else it
+                        if(it.id == messages.id) it.copy(read = true) else it
                     }
                     _dashboard.value = currentDashboard.copy(messages = updatedMessages)
                 }
@@ -344,6 +345,58 @@ class MainViewModel(
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while deleting the skill category")
+            }
+        }
+    }
+
+    fun deleteBlog(blogs: Blogs){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = blogUseCase.deleteBlog(blogs)
+            if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedBlogs = currentDashboard.blogs.filter { it.id != blogs.id }
+
+                    _dashboard.value = currentDashboard.copy(blogs = updatedBlogs)
+                }
+                _uiEvent.value = UIEvent.success
+            } else {
+                _uiEvent.value = UIEvent.ShowError("Error while deleting the blog")
+            }
+        }
+    }
+
+    fun publishBlog(
+        blogs: Blogs,
+        isPublished : Boolean
+    ){
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+
+            val res = blogUseCase.publishBlog(blogs, isPublished)
+            if (res.isSuccess) {
+
+                val currentDashboard = _dashboard.value
+                if (currentDashboard != null) {
+                    val updatedBlogs = currentDashboard.blogs.map { blog ->
+                        if (blog.id == blogs.id) {
+                            blog.copy(published = isPublished)
+                        } else {
+                            blog
+                        }
+                    }
+                    _dashboard.value = currentDashboard.copy(blogs = updatedBlogs)
+                }
+
+                _uiEvent.value = UIEvent.success
+            } else {
+                if(!isPublished){
+                    _uiEvent.value = UIEvent.ShowError("Error while unpublishing the blog")
+                } else {
+                    _uiEvent.value = UIEvent.ShowError("Error while publishing the blog")
+                }
             }
         }
     }

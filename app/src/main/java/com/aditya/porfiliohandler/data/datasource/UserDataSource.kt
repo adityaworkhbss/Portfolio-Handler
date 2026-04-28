@@ -360,5 +360,23 @@ class UserDataSource(
             Result.failure(e)
         }
     }
+
+    suspend fun publishBlog(blogs: Blogs, isPublished: Boolean) : Result<Unit> {
+        return try {
+            var toPublish = false
+            if(!isPublished){
+                toPublish = true
+            }
+
+            db.collection("blogs")
+                .document(blogs.id)
+                .update("published", toPublish)
+                .await()
+            Result.success(Unit)
+        } catch (e: Exception){
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
 }
 

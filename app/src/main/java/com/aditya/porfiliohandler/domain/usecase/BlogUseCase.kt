@@ -7,4 +7,5 @@ class BlogUseCase(
     private val repository: UserRepository
 ){
     suspend fun deleteBlog(blogs: Blogs) = repository.deleteBlog(blogs)
+    suspend fun publishBlog(blogs: Blogs, isPublished : Boolean) = repository.publishBlog(blogs, isPublished)
 }

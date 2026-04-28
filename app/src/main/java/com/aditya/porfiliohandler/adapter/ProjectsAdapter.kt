@@ -1,7 +1,6 @@
 package com.aditya.porfiliohandler.adapter
 
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aditya.porfiliohandler.databinding.ItemProjectBinding
 import com.aditya.porfiliohandler.domain.model.Projects
 import com.google.android.material.chip.Chip
+import androidx.core.net.toUri
 
 class ProjectsAdapter(
     private var items: List<Projects>,
@@ -56,7 +56,7 @@ class ProjectsAdapter(
         if (item.githubUrl.isNotEmpty()) {
             holder.binding.githubButton.visibility = View.VISIBLE
             holder.binding.githubButton.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.githubUrl))
+                val intent = Intent(Intent.ACTION_VIEW, item.githubUrl.toUri())
                 it.context.startActivity(intent)
             }
         } else {
@@ -67,7 +67,7 @@ class ProjectsAdapter(
         if (item.liveUrl.isNotEmpty()) {
             holder.binding.liveButton.visibility = View.VISIBLE
             holder.binding.liveButton.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.liveUrl))
+                val intent = Intent(Intent.ACTION_VIEW, item.liveUrl.toUri())
                 it.context.startActivity(intent)
             }
         } else {

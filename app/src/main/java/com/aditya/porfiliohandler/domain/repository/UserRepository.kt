@@ -1,6 +1,5 @@
 package com.aditya.porfiliohandler.domain.repository
 
-import com.aditya.porfiliohandler.domain.model.About
 import com.aditya.porfiliohandler.domain.model.Blogs
 import com.aditya.porfiliohandler.domain.model.Dashboard
 import com.aditya.porfiliohandler.domain.model.Experience
@@ -35,4 +34,5 @@ interface UserRepository {
     suspend fun deleteExperience(experience: Experience) : Result<Unit>
 
     suspend fun deleteBlog(blogs: Blogs) : Result<Unit>
+    suspend fun publishBlog(blogs: Blogs, isPublished : Boolean) : Result<Unit>
 }
