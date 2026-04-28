@@ -25,6 +25,10 @@
         <item
             android:id="@+id/experienceFragment"
             android:title="Experience" />
+
+        <item
+            android:id="@id/webViewFragment"
+            android:title="WebView"/>
     </group>
 
     <item android:title="Other">

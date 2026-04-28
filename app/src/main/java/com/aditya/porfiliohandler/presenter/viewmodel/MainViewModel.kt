@@ -382,7 +382,7 @@ class MainViewModel(
                 if (currentDashboard != null) {
                     val updatedBlogs = currentDashboard.blogs.map { blog ->
                         if (blog.id == blogs.id) {
-                            blog.copy(published = isPublished)
+                            blog.copy(published = !isPublished)
                         } else {
                             blog
                         }
