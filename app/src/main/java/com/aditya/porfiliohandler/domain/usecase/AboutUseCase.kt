@@ -31,5 +31,11 @@ class AboutUseCase(
 
     suspend fun deleteSkillCategory(skillCategory: SkillCategory) =
         repository.deleteSkillCategory(skillCategory)
+
+    suspend fun uploadAvatar(url: String) =
+        repository.uploadAvatar(url)
+
+    suspend fun uploadResume(url: String) =
+        repository.uploadResume(url)
 }
 

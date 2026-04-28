@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,6 +35,20 @@ class AboutFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
 
     private lateinit var About: About
+
+    private val pickImage = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri ?: return@registerForActivityResult
+        viewModel.uploadAvatar(uri)
+    }
+
+    private val pickPdf = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri ?: return@registerForActivityResult
+        viewModel.uploadResume(uri)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -173,6 +188,16 @@ class AboutFragment : Fragment() {
 
         binding.btnAddSkill.setOnClickListener {
             showSkillCategoryAddDialog()
+        }
+
+        // Tap the avatar circle → pick an image
+        binding.avatarImage.setOnClickListener {
+            pickImage.launch("image/*")
+        }
+
+        // "Update Resume" button → pick a PDF
+        binding.resumeButton.setOnClickListener {
+            pickPdf.launch("application/pdf")
         }
     }
 

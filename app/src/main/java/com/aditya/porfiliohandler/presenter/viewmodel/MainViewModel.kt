@@ -1,9 +1,11 @@
 package com.aditya.porfiliohandler.presenter.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aditya.porfiliohandler.data.datasource.CloudinaryDataSource
 import com.aditya.porfiliohandler.domain.model.*
 import com.aditya.porfiliohandler.domain.usecase.*
 import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
@@ -15,7 +17,8 @@ class MainViewModel(
     private val aboutUseCase: AboutUseCase,
     private val projectUseCase: ProjectUseCase,
     private val experienceUseCase: ExperienceUseCase,
-    private val blogUseCase: BlogUseCase
+    private val blogUseCase: BlogUseCase,
+    private val cloudinaryDataSource: CloudinaryDataSource
 ) : ViewModel() {
 
     private val _dashboard = MutableLiveData<Dashboard>()
@@ -397,6 +400,53 @@ class MainViewModel(
                 } else {
                     _uiEvent.value = UIEvent.ShowError("Error while publishing the blog")
                 }
+            }
+        }
+    }
+
+    /** Upload a new avatar image to Cloudinary, then save the URL to Firestore. */
+    fun uploadAvatar(uri: Uri) {
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+            try {
+                val url = cloudinaryDataSource.uploadImage(uri)
+                val res = aboutUseCase.uploadAvatar(url)
+                if (res.isSuccess) {
+                    val currentDashboard = _dashboard.value
+                    val currentAbout = currentDashboard?.about
+                    if (currentDashboard != null && currentAbout != null) {
+                        val updatedAbout = currentAbout.copy(avatarUrl = url)
+                        _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                    }
+                    _uiEvent.value = UIEvent.success
+                } else {
+                    _uiEvent.value = UIEvent.ShowError("Failed to save avatar URL")
+                }
+            } catch (e: Exception) {
+                _uiEvent.value = UIEvent.ShowError("Avatar upload failed: ${e.message}")
+            }
+        }
+    }
+
+    fun uploadResume(uri: Uri) {
+        viewModelScope.launch {
+            _uiEvent.value = UIEvent.loading
+            try {
+                val url = cloudinaryDataSource.uploadPdf(uri)
+                val res = aboutUseCase.uploadResume(url)
+                if (res.isSuccess) {
+                    val currentDashboard = _dashboard.value
+                    val currentAbout = currentDashboard?.about
+                    if (currentDashboard != null && currentAbout != null) {
+                        val updatedAbout = currentAbout.copy(resumeUrl = url)
+                        _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                    }
+                    _uiEvent.value = UIEvent.success
+                } else {
+                    _uiEvent.value = UIEvent.ShowError("Failed to save resume URL")
+                }
+            } catch (e: Exception) {
+                _uiEvent.value = UIEvent.ShowError("Resume upload failed: ${e.message}")
             }
         }
     }

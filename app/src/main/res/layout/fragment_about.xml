@@ -12,21 +12,44 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Header Section -->
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avatarImage"
+        <!-- Avatar + tap-to-change badge -->
+        <FrameLayout
+            android:id="@+id/avatarContainer"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="24dp"
-            android:padding="2dp"
-            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/CircleImage"
-            app:strokeColor="@color/accent_primary"
-            app:strokeWidth="2dp"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avatarImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                app:strokeColor="@color/accent_primary"
+                app:strokeWidth="2dp"
+                tools:src="@tools:sample/avatars" />
+
+            <!-- Camera-badge overlay (bottom-right) -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="4dp"
+                android:background="@color/accent_primary"
+                android:padding="5dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:importantForAccessibility="no"
+                app:tint="@android:color/white" />
+
+        </FrameLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
@@ -35,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Full Name"
-            app:layout_constraintTop_toBottomOf="@id/avatarImage">
+            app:layout_constraintTop_toBottomOf="@id/avatarContainer">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEdit"
@@ -328,7 +351,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Download Resume"
+            android:text="Update Resume"
             app:cornerRadius="12dp"
             app:icon="@android:drawable/ic_menu_save"
             app:iconTint="@color/fg_primary"

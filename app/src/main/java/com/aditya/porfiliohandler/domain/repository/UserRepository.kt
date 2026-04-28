@@ -35,4 +35,7 @@ interface UserRepository {
 
     suspend fun deleteBlog(blogs: Blogs) : Result<Unit>
     suspend fun publishBlog(blogs: Blogs, isPublished : Boolean) : Result<Unit>
+
+    suspend fun uploadAvatar(url: String) : Result<Unit>
+    suspend fun uploadResume(url: String) : Result<Unit>
 }

@@ -378,5 +378,33 @@ class UserDataSource(
             Result.failure(e)
         }
     }
+
+    /** Persist the uploaded avatar URL back into the Firestore `about` document. */
+    suspend fun updateAvatarUrl(url: String): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+                ?: return Result.failure(Exception("About document not found"))
+            db.collection("about").document(doc.id).update("avatarUrl", url).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
+
+    /** Persist the uploaded resume PDF URL back into the Firestore `about` document. */
+    suspend fun updateResumeUrl(url: String): Result<Unit> {
+        return try {
+            val snapshot = db.collection("about").get().await()
+            val doc = snapshot.documents.firstOrNull()
+                ?: return Result.failure(Exception("About document not found"))
+            db.collection("about").document(doc.id).update("resumeUrl", url).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
 }
 

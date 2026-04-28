@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.aditya.porfiliohandler.data.datasource.CloudinaryDataSource
 import com.aditya.porfiliohandler.data.datasource.UserDataSource
 import com.aditya.porfiliohandler.data.local.SessionManager
 import com.aditya.porfiliohandler.data.repository.UserRepositoryImpl
@@ -49,7 +50,8 @@ class MainActivity : AppCompatActivity() {
         MainViewModelFactory(
             UserRepositoryImpl(
                 UserDataSource(FirebaseFirestore.getInstance())
-            )
+            ),
+            CloudinaryDataSource(applicationContext)
         )
     }
 

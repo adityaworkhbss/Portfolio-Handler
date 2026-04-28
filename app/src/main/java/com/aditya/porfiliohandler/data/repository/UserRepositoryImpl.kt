@@ -104,4 +104,12 @@ class UserRepositoryImpl(
     override suspend fun publishBlog(blogs: Blogs, isPublished : Boolean): Result<Unit> {
         return dataSource.publishBlog(blogs, isPublished)
     }
+
+    override suspend fun uploadAvatar(url: String): Result<Unit> {
+        return dataSource.updateAvatarUrl(url)
+    }
+
+    override suspend fun uploadResume(url: String): Result<Unit> {
+        return dataSource.updateResumeUrl(url)
+    }
 }
