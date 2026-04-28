@@ -75,8 +75,13 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.dashboardFragment, R.id.aboutFragment, R.id.experienceFragment,
-                R.id.projectsFragment, R.id.messagesFragment, R.id.blogsFragment
+                R.id.dashboardFragment,
+                R.id.aboutFragment,
+                R.id.experienceFragment,
+                R.id.projectsFragment,
+                R.id.messagesFragment,
+                R.id.blogsFragment,
+                R.id.webViewFragment
             ), drawerLayout
         )
 

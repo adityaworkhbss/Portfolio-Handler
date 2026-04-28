@@ -4,31 +4,38 @@
 
         <item
             android:id="@+id/dashboardFragment"
+            android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
 
         <item
             android:id="@+id/aboutFragment"
+            android:icon="@drawable/ic_person"
             android:title="About" />
 
         <item
             android:id="@+id/projectsFragment"
+            android:icon="@drawable/ic_folder"
             android:title="Projects" />
 
         <item
             android:id="@+id/messagesFragment"
+            android:icon="@drawable/ic_message"
             android:title="Messages" />
 
         <item
             android:id="@+id/blogsFragment"
+            android:icon="@drawable/ic_article"
             android:title="Blogs" />
 
         <item
             android:id="@+id/experienceFragment"
+            android:icon="@drawable/ic_work"
             android:title="Experience" />
 
         <item
-            android:id="@id/webViewFragment"
-            android:title="WebView"/>
+            android:id="@+id/webViewFragment"
+            android:icon="@drawable/ic_web"
+            android:title="WebView" />
     </group>
 
     <item android:title="Other">
@@ -36,10 +43,12 @@
         <menu>
             <item
                 android:id="@+id/nav_refresh"
+                android:icon="@drawable/ic_refresh"
                 android:title="Refresh" />
 
             <item
                 android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
                 android:title="Logout" />
         </menu>
 

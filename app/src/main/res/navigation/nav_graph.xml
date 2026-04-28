@@ -33,4 +33,9 @@
         android:name="com.aditya.porfiliohandler.presenter.ui.main.ExperienceFragment"
         android:label="Experience" />
 
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.aditya.porfiliohandler.presenter.ui.main.WebViewFragment"
+        android:label="Web View" />
+
 </navigation>

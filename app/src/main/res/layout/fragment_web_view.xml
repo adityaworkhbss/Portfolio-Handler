@@ -7,8 +7,19 @@
 
     <WebView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/webview"
-        />
+        android:layout_height="match_parent"
+        android:id="@+id/webview" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_gravity="top"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+        android:progressTint="@color/accent_primary"
+        android:progressBackgroundTint="@android:color/transparent" />
 
 </FrameLayout>
