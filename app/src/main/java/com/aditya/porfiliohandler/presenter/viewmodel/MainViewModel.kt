@@ -36,6 +36,11 @@ class MainViewModel(
 
             val res = messageUseCase.delete(message)
             if (res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedMessages = currentDashboard.messages.filter { it.id != message.id }
+                    _dashboard.value = currentDashboard.copy(messages = updatedMessages)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while deleting the message")
@@ -49,6 +54,13 @@ class MainViewModel(
 
             val res = messageUseCase.read(messages)
             if (res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedMessages = currentDashboard.messages.map {
+                        if(it.id == messages.id) messages else it
+                    }
+                    _dashboard.value = currentDashboard.copy(messages = updatedMessages)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the message")
@@ -63,6 +75,15 @@ class MainViewModel(
 
             val res = aboutUseCase.updateStats(stat)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedStats = currentAbout.stats.map {
+                        if(it.label == stat.label) stat else it
+                    }
+                    val updatedAbout = currentAbout.copy(stats = updatedStats)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the stat")
@@ -76,6 +97,15 @@ class MainViewModel(
 
             val res = aboutUseCase.updateSocialLink(oldSocialLink, newSocialLink)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedSocialLinks = currentAbout.socialLinks.map {
+                        if(it.platform == oldSocialLink.platform) newSocialLink else it
+                    }
+                    val updatedAbout = currentAbout.copy(socialLinks = updatedSocialLinks)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the social link")
@@ -89,6 +119,13 @@ class MainViewModel(
 
             val res = aboutUseCase.addSocialLink(socialLink)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedSocialLinks = currentAbout.socialLinks + socialLink
+                    val updatedAbout = currentAbout.copy(socialLinks = updatedSocialLinks)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while adding the social link")
@@ -102,6 +139,15 @@ class MainViewModel(
 
             val res = aboutUseCase.updateSkillCategory(oldSkillCategory, newSkillCategory)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedSkills = currentAbout.skills.map {
+                        if(it.category == oldSkillCategory.category) newSkillCategory else it
+                    }
+                    val updatedAbout = currentAbout.copy(skills = updatedSkills)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the skill category")
@@ -115,6 +161,13 @@ class MainViewModel(
 
             val res = aboutUseCase.addSkillCategory(skillCategory)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                val currentAbout = currentDashboard?.about
+                if(currentDashboard != null && currentAbout != null){
+                    val updatedSkills = currentAbout.skills + skillCategory
+                    val updatedAbout = currentAbout.copy(skills = updatedSkills)
+                    _dashboard.value = currentDashboard.copy(about = updatedAbout)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while adding the skill category")
@@ -128,6 +181,11 @@ class MainViewModel(
 
             val res = projectUseCase.addProject(project)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedProjects = currentDashboard.projects + project
+                    _dashboard.value = currentDashboard.copy(projects = updatedProjects)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while adding the project")
@@ -141,6 +199,13 @@ class MainViewModel(
 
             val res = projectUseCase.updateProject(project)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedProjects = currentDashboard.projects.map {
+                        if(it.id == project.id) project else it
+                    }
+                    _dashboard.value = currentDashboard.copy(projects = updatedProjects)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the project")
@@ -154,6 +219,11 @@ class MainViewModel(
 
             val res = experienceUseCase.addExperience(experience)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedExperience = currentDashboard.experience + experience
+                    _dashboard.value = currentDashboard.copy(experience = updatedExperience)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while adding the experience")
@@ -167,6 +237,13 @@ class MainViewModel(
 
             val res = experienceUseCase.updateExperience(experience)
             if(res.isSuccess){
+                val currentDashboard = _dashboard.value
+                if(currentDashboard != null){
+                    val updatedExperience = currentDashboard.experience.map {
+                        if(it.id == experience.id) experience else it
+                    }
+                    _dashboard.value = currentDashboard.copy(experience = updatedExperience)
+                }
                 _uiEvent.value = UIEvent.success
             } else {
                 _uiEvent.value = UIEvent.ShowError("Error while updating the experience")
