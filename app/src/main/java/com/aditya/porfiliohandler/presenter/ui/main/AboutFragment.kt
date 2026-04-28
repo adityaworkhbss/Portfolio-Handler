@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import com.aditya.porfiliohandler.domain.model.About
 import com.aditya.porfiliohandler.domain.model.SkillCategory
 import com.aditya.porfiliohandler.domain.model.SocialLink
 import com.aditya.porfiliohandler.domain.model.Stat
+import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 import com.bumptech.glide.Glide
 
@@ -55,6 +58,25 @@ class AboutFragment : Fragment() {
                 setSocialLinks()
                 setSkills()
                 setupAddButtons()
+            }
+        }
+
+        viewModel.uiEvent.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is UIEvent.ShowToast -> {
+                    showProgress(false)
+                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+                is UIEvent.ShowError -> {
+                    showProgress(false)
+                    showErrorDialog(event.message)
+                }
+                is UIEvent.loading -> {
+                    showProgress(true)
+                }
+                is UIEvent.success -> {
+                    showProgress(false)
+                }
             }
         }
     }
@@ -178,6 +200,14 @@ class AboutFragment : Fragment() {
             viewModel.addSkillCategory(newSkill)
         }
         sheet.show(parentFragmentManager, "SkillCategoryAddBottomSheet")
+    }
+
+    fun showProgress(toShow: Boolean) {
+        binding.progressBar.isVisible = toShow
+    }
+
+    fun showErrorDialog(message : String){
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {

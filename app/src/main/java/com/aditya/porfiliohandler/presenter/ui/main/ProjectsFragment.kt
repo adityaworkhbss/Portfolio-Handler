@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.porfiliohandler.adapter.ProjectsAdapter
 import com.aditya.porfiliohandler.bottomsheets.ProjectBottomSheet
 import com.aditya.porfiliohandler.databinding.FragmentProjectsBinding
 import com.aditya.porfiliohandler.domain.model.Projects
+import com.aditya.porfiliohandler.presenter.responseHandler.UIEvent
 import com.aditya.porfiliohandler.presenter.viewmodel.MainViewModel
 
 class ProjectsFragment : Fragment() {
@@ -57,6 +60,25 @@ class ProjectsFragment : Fragment() {
                 adapter.updateItems(projects)
             }
         }
+
+        viewModel.uiEvent.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is UIEvent.ShowToast -> {
+                    showProgress(false)
+                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+                is UIEvent.ShowError -> {
+                    showProgress(false)
+                    showErrorDialog(event.message)
+                }
+                is UIEvent.loading -> {
+                    showProgress(true)
+                }
+                is UIEvent.success -> {
+                    showProgress(false)
+                }
+            }
+        }
     }
 
     private fun setupAddButton() {
@@ -77,6 +99,14 @@ class ProjectsFragment : Fragment() {
             viewModel.addProject(newProject)
         }
         sheet.show(parentFragmentManager, "ProjectAddBottomSheet")
+    }
+
+    fun showProgress(toShow: Boolean) {
+        binding.progressBar.isVisible = toShow
+    }
+
+    fun showErrorDialog(message : String){
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {
